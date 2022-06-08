@@ -4,7 +4,6 @@ import { PlanetContext } from '../contexts/PlanetContext';
 function Table() {
   const { planets, nameFilter, numericFilter, order } = useContext(PlanetContext);
   const { planetsData, loading } = planets;
-  const labelsToExclude = ['population', 'films', 'created', 'edited', 'url', 'gravity', 'residents', 'surface_water'] ;
   const planetsToExclude = ['Aleen Minor', 'unknown', 'Troiken', 'Tholoth', 'Quermia', 'Stewjon', 'Tund', 'Glee Anselm']
 
 
@@ -12,11 +11,11 @@ function Table() {
     return numericFilter.reduce((acc, filter) => {
       return acc.filter((planet) => {
         switch (filter.comparison) {
-          case 'maior que':
+          case 'greater than':
             return planet[filter.column] > filter.value
-          case 'menor que':
+          case 'less than':
             return planet[filter.column] < filter.value
-          case 'igual':
+          case 'equal to':
             return planet[filter.column] === filter.value
           default:
            return true
@@ -73,24 +72,21 @@ function Table() {
     ));
   }
 
-  function renderHeader() {
-    const headerLabels = Object.keys(planetsData[0])
-      .filter((label) => !labelsToExclude.includes(label));
-    return (
-      <thead>
-        <tr>
-          { headerLabels.map((label) => <th key={ label }>{label}</th>) }
-        </tr>
-      </thead>
-    );
-  }
-
   return (
     <div>
       { loading && <p>loading</p> }
       { !loading && (
         <table>
-          { renderHeader() }
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Rotation period</th>
+              <th>Orbital period</th>
+              <th>Diameter</th>
+              <th>Climate</th>
+              <th>Terrain</th>
+            </tr>
+          </thead>          
           <tbody>
             { renderPlanets() }
           </tbody>

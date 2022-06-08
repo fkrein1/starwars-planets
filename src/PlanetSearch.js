@@ -6,7 +6,7 @@ import Table from './components/Table';
 
 function PlanetSearch() {
   return (
-    <div>
+    <div id="planet">
       <NameFilter />
       <NumericFilter />
       <Order />

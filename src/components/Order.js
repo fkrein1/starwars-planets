@@ -11,7 +11,6 @@ function Order() {
   return (
     <form>
       <select
-        data-testid="column-sort"
         onChange={ handleChange }
         name="column"
         value={ order.column }

@@ -4,7 +4,7 @@ import { PlanetContext } from '../contexts/PlanetContext';
 function NumericFilter() {
   const { numericFilter, setNumericFilter } = useContext(PlanetContext);
   const [column, setColumn] = useState('rotation_period')
-  const [comparison, setComparison] = useState('maior que')
+  const [comparison, setComparison] = useState('greater than')
   const [value, setValue] = useState(0)
   const [options, setOptions] = useState(['rotation_period', 'orbital_period', 'diameter'])
 
@@ -17,7 +17,7 @@ function NumericFilter() {
     const newOptions = options.filter((option) => option !== column);
     setOptions(newOptions);
     setColumn(newOptions[0]);
-    setComparison('maior que');
+    setComparison('greather than');
     setValue(0);
   }
 
@@ -63,7 +63,6 @@ function NumericFilter() {
     <div>
       <form>
         <select
-          data-testid="column-filter"
           onChange={ (e) => setColumn(e.target.value) }
           name="column"
           value={ column }
@@ -71,14 +70,13 @@ function NumericFilter() {
           { renderOptions() }
         </select>
         <select
-          data-testid="comparison-filter"
           onChange={ (e) => setComparison(e.target.value) }
           name="comparison"
           value={ comparison }
         >
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
+          <option value="greater than">greater than</option>
+          <option value="less than">less than</option>
+          <option value="equal to">equal to</option>
         </select>
         <input
           placeholder="value"
@@ -91,13 +89,13 @@ function NumericFilter() {
           type="button"
           onClick={ handleFilter }
         >
-          Filtrar
+          Filter
         </button>
         <button
           type="button"
           onClick={ deleteAllFilters }
         >
-          Remover Filtros
+          Remove Filter
         </button>
       </form>
       { renderActiveFilters() }
