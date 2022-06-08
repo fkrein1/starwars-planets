@@ -16,10 +16,10 @@ function Order() {
         name="column"
         value={ order.column }
       >
-      <option value="rotation_period">rotation_period</option>
+        <option value="name">name</option> 
+        <option value="rotation_period">rotation_period</option>
         <option value="orbital_period">orbital_period</option>
         <option value="diameter">diameter</option>
-        <option value="surface_water">surface_water</option>
       </select>
       <label htmlFor="ASC">
         ASC

@@ -4,30 +4,47 @@ import { PlanetContext } from '../contexts/PlanetContext';
 function Table() {
   const { planets, nameFilter, numericFilter, order } = useContext(PlanetContext);
   const { planetsData, loading } = planets;
+  const labelsToExclude = ['population', 'films', 'created', 'edited', 'url', 'gravity', 'residents', 'surface_water'] ;
+  const planetsToExclude = ['Aleen Minor', 'unknown', 'Troiken', 'Tholoth', 'Quermia', 'Stewjon', 'Tund', 'Glee Anselm']
+
 
   function filterByNumeric(planets) {
-    const fail = [];
-    planets.forEach((planet) => {
-      numericFilter
-        .forEach(({ column, comparison, value }) => {
-          if (planet[column] === 'unknown') fail.push(planet);
-          if (comparison === 'maior que'
-            && Number(planet[column]) <= value) fail.push(planet);
-          if (comparison === 'menor que'
-            && Number(planet[column]) >= value) fail.push(planet);
-          if (comparison === 'igual a'
-            && Number(planet[column]) !== value) fail.push(planet);
-        });
-    });
-    return planets.filter((planet) => !fail.includes(planet));
+    return numericFilter.reduce((acc, filter) => {
+      return acc.filter((planet) => {
+        switch (filter.comparison) {
+          case 'maior que':
+            return planet[filter.column] > filter.value
+          case 'menor que':
+            return planet[filter.column] < filter.value
+          case 'igual':
+            return planet[filter.column] === filter.value
+          default:
+           return true
+        }
+      })
+    }, planets)
   }
 
   function filterByName(planets) {
-    return planetsData
+    return planets
       .filter((planet) => planet.name.toLowerCase().includes(nameFilter.toLowerCase()));
   }
 
+  function alphabetical(x, y) {
+    return x.name.localeCompare(y.name);
+  }
+
+  function inverseAlphabetical(x, y) {
+    return y.name.localeCompare(x.name);
+  }
+
   function sortPlanets(planets) {
+    if (order.order === 'ASC' && order.column === 'name') {
+      return planets.sort(alphabetical);
+    }
+    if (order.order === 'DESC' && order.column === 'name') {
+      return planets.sort(inverseAlphabetical);
+    }
     if (order.order === 'ASC') {
       return planets.sort((a, b) => a[order.column] - b[order.column]);
     }
@@ -40,7 +57,7 @@ function Table() {
     const filteredByName = filterByName(planetsData);
     const filteredByNumeric = filterByNumeric(filteredByName);
     const filteredAndSorted = sortPlanets(filteredByNumeric);
-    return filteredAndSorted;
+    return filteredAndSorted.filter((planet) => !planetsToExclude.includes(planet.name));
   }
 
   function renderPlanets() {
@@ -52,13 +69,11 @@ function Table() {
         <td>{ planet.diameter }</td>
         <td>{ planet.climate }</td>
         <td>{ planet.terrain }</td>
-        <td>{ planet.surface_water }</td>
       </tr>
     ));
   }
 
   function renderHeader() {
-    const labelsToExclude = ['population', 'films', 'created', 'edited', 'url', 'gravity', 'residents'];
     const headerLabels = Object.keys(planetsData[0])
       .filter((label) => !labelsToExclude.includes(label));
     return (
@@ -71,14 +86,17 @@ function Table() {
   }
 
   return (
-    !loading && (
-      <table>
-        { renderHeader() }
-        <tbody>
-          { renderPlanets() }
-        </tbody>
-      </table>
-    )
+    <div>
+      { loading && <p>loading</p> }
+      { !loading && (
+        <table>
+          { renderHeader() }
+          <tbody>
+            { renderPlanets() }
+          </tbody>
+        </table>
+     )}
+    </div>
   );
 }
 

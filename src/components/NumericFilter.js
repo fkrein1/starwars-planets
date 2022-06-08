@@ -6,11 +6,11 @@ function NumericFilter() {
   const [column, setColumn] = useState('rotation_period')
   const [comparison, setComparison] = useState('maior que')
   const [value, setValue] = useState(0)
-  const [options, setOptions] = useState(['rotation_period', 'orbital_period', 'diameter', 'surface_water'])
+  const [options, setOptions] = useState(['rotation_period', 'orbital_period', 'diameter'])
 
   function addFilter() {
     const newFilter = { column, comparison, value: Number(value) };
-    setNumericFilter([...numericFilter, newFilter]);
+    setNumericFilter((prevState) => [...prevState, newFilter]);
   }
 
   function resetForm() {
@@ -36,12 +36,12 @@ function NumericFilter() {
     const newFilters = numericFilter.filter(({ column }) => column !== columnName);
     console.log(newFilters)
     setNumericFilter([...newFilters]);
-    setOptions((prevState) => ([...prevState, columnName]));
+    setOptions((prevState) => [...prevState, columnName]);
   }
 
   function deleteAllFilters() {
     setNumericFilter([]);
-    setOptions(['rotation_period', 'orbital_period', 'diameter', 'surface_water']);
+    setOptions(['rotation_period', 'orbital_period', 'diameter']);
   }
 
   function renderActiveFilters() {
@@ -84,7 +84,7 @@ function NumericFilter() {
           placeholder="value"
           type="number"
           name="value"
-          onChange={ (e) => setValue(e.target.value) }
+          onChange={ (e) => setValue(Number(e.target.value)) }
           value={ value }
         />
         <button
