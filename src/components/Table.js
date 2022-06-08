@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { PlanetContext } from '../contexts/PlanetContext';
 
 function Table() {
-  const { data } = useContext(PlanetContext);
-  const { planets, filterByName, filterByNumericValues, order } = data;
+  const { planets, nameFilter, numericFilter, order } = useContext(PlanetContext);
+  const { planetsData, loading } = planets;
 
-  function filterNumeric(filteredPlanets) {
+  function filterByNumeric(planets) {
     const fail = [];
-    filteredPlanets.forEach((planet) => {
-      filterByNumericValues
+    planets.forEach((planet) => {
+      numericFilter
         .forEach(({ column, comparison, value }) => {
           if (planet[column] === 'unknown') fail.push(planet);
           if (comparison === 'maior que'
@@ -19,57 +19,48 @@ function Table() {
             && Number(planet[column]) !== value) fail.push(planet);
         });
     });
-    return filteredPlanets.filter((planet) => !fail.includes(planet));
+    return planets.filter((planet) => !fail.includes(planet));
   }
 
-  function sortAlphabetical(x, y) {
-    return x.name.localeCompare(y.name);
+  function filterByName(planets) {
+    return planetsData
+      .filter((planet) => planet.name.toLowerCase().includes(nameFilter.toLowerCase()));
   }
 
-  function filterPlanets() {
-    let filteredPlanets = planets
-      .filter((planet) => planet.name.includes(filterByName));
+  function sortPlanets(planets) {
+    if (order.order === 'ASC') {
+      return planets.sort((a, b) => a[order.column] - b[order.column]);
+    }
+    if (order.order === 'DESC') {
+      return planets.sort((a, b) => b[order.column] - a[order.column]);
+    }
+  }
 
-    if (filterByNumericValues.length > 0) {
-      filteredPlanets = filterNumeric(filteredPlanets);
-    }
-    if (order.sort === 'ASC') {
-      return filteredPlanets
-        .sort((a, b) => a[order.column] - b[order.column]);
-    }
-    if (order.sort === 'DESC') {
-      return filteredPlanets
-        .sort((a, b) => b[order.column] - a[order.column]);
-    }
-    console.log(filteredPlanets.sort((a, b) => a.name - b.name));
-
-    return filteredPlanets.sort(sortAlphabetical);
+  function combinedFilters() {
+    const filteredByName = filterByName(planetsData);
+    const filteredByNumeric = filterByNumeric(filteredByName);
+    const filteredAndSorted = sortPlanets(filteredByNumeric);
+    return filteredAndSorted;
   }
 
   function renderPlanets() {
-    return filterPlanets().map((planet) => (
+    return combinedFilters().map((planet) => (
       <tr key={ planet.name }>
-        <td data-testid="planet-name">{ planet.name }</td>
+        <td>{ planet.name }</td>
         <td>{ planet.rotation_period }</td>
         <td>{ planet.orbital_period }</td>
         <td>{ planet.diameter }</td>
         <td>{ planet.climate }</td>
-        <td>{ planet.gravity }</td>
         <td>{ planet.terrain }</td>
         <td>{ planet.surface_water }</td>
-        <td>{ planet.population }</td>
-        <td>{ planet.films }</td>
-        <td>{ planet.created }</td>
-        <td>{ planet.edited }</td>
-        <td>{ planet.url }</td>
       </tr>
     ));
   }
 
   function renderHeader() {
-    const headerLabels = Object.keys(planets[0])
-      .filter((label) => label !== 'residents');
-
+    const labelsToExclude = ['population', 'films', 'created', 'edited', 'url', 'gravity', 'residents'];
+    const headerLabels = Object.keys(planetsData[0])
+      .filter((label) => !labelsToExclude.includes(label));
     return (
       <thead>
         <tr>
@@ -80,7 +71,7 @@ function Table() {
   }
 
   return (
-    planets && (
+    !loading && (
       <table>
         { renderHeader() }
         <tbody>

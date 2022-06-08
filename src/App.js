@@ -1,6 +1,6 @@
 import React from 'react';
 import { Planets } from './contexts/PlanetContext';
-import PlanetSearch from './pages/PlanetSearch';
+import PlanetSearch from './PlanetSearch';
 
 function App() {
   return (
