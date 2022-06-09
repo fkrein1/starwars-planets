@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 export const PlanetContext = createContext();
 
 export function Planets({ children }) {
-  const [planets, setPlanets] = useState({loading: true, planetsData: ''});
+  const [planets, setPlanets] = useState({loading: true, planetsData: []});
   const [nameFilter, setNameFilter] = useState('');
   const [numericFilter, setNumericFilter] = useState([]);
-  const [order, setOrder] = useState({column: 'name', order: 'ASC'}) 
+  const [order, setOrder] = useState({column: 'name', type: 'ASC'}) 
 
 
   useEffect(() => {

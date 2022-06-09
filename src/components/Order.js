@@ -24,10 +24,9 @@ function Order() {
         ASC
         <input
           type="radio"
-          id="ASC"
-          name="order"
+          name="type"
           value="ASC"
-          checked={ order.order === 'ASC' }
+          checked={ order.type === 'ASC' }
           onChange={ handleChange }
         />
       </label>
@@ -35,10 +34,9 @@ function Order() {
         DESC
         <input
           type="radio"
-          id="DESC"
-          name="order"
+          name="type"
           value="DESC"
-          checked={ order.order === 'DESC' }
+          checked={ order.type === 'DESC' }
           onChange={ handleChange }
         />
       </label>

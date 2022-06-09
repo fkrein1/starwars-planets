@@ -38,16 +38,16 @@ function Table() {
   }
 
   function sortPlanets(planets) {
-    if (order.order === 'ASC' && order.column === 'name') {
+    if (order.type === 'ASC' && order.column === 'name') {
       return planets.sort(alphabetical);
     }
-    if (order.order === 'DESC' && order.column === 'name') {
+    if (order.type === 'DESC' && order.column === 'name') {
       return planets.sort(inverseAlphabetical);
     }
-    if (order.order === 'ASC') {
+    if (order.type === 'ASC') {
       return planets.sort((a, b) => a[order.column] - b[order.column]);
     }
-    if (order.order === 'DESC') {
+    if (order.type === 'DESC') {
       return planets.sort((a, b) => b[order.column] - a[order.column]);
     }
   }

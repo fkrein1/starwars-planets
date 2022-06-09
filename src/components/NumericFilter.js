@@ -34,7 +34,6 @@ function NumericFilter() {
 
   function deleteFilter(columnName) {
     const newFilters = numericFilter.filter(({ column }) => column !== columnName);
-    console.log(newFilters)
     setNumericFilter([...newFilters]);
     setOptions((prevState) => [...prevState, columnName]);
   }
