@@ -1,9 +1,16 @@
-#planet {
+#wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   flex: auto;
+}
+
+.planet {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 table th, table td {

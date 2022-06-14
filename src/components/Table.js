@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { PlanetContext } from '../contexts/PlanetContext';
+import { planetImages } from '../assets/planetImages.js'
 
 function Table() {
   const { planets, nameFilter, numericFilter, order } = useContext(PlanetContext);
@@ -60,15 +61,16 @@ function Table() {
   }
 
   function renderPlanets() {
-    return combinedFilters().map((planet) => (
-      <tr key={ planet.name }>
-        <td>{ planet.name }</td>
-        <td>{ planet.rotation_period }</td>
-        <td>{ planet.orbital_period }</td>
-        <td>{ planet.diameter }</td>
-        <td>{ planet.climate }</td>
-        <td>{ planet.terrain }</td>
-      </tr>
+    return combinedFilters().map((planet, index) => (
+      <div key={ planet.name } className="planet">
+        <p>{index + 1 }</p>
+        <img src={planetImages.find(img => img.planet === planet.name).image} alt={planet.name} />
+        <p>{ planet.name }</p>
+        <p>{ planet.rotation_period }</p>
+        <p>{ planet.orbital_period }</p>
+        <p>{ planet.diameter }</p>
+        <p>{ planet.terrain }</p>
+      </div>
     ));
   }
 
@@ -76,21 +78,7 @@ function Table() {
     <div>
       { loading && <p>loading</p> }
       { !loading && (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Rotation period</th>
-              <th>Orbital period</th>
-              <th>Diameter</th>
-              <th>Climate</th>
-              <th>Terrain</th>
-            </tr>
-          </thead>          
-          <tbody>
-            { renderPlanets() }
-          </tbody>
-        </table>
+        renderPlanets()
      )}
     </div>
   );
