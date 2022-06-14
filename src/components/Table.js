@@ -63,7 +63,6 @@ function Table() {
   function renderPlanets() {
     return combinedFilters().map((planet, index) => (
       <div key={ planet.name } className="planet">
-        <p>{`#${index + 1 }`}</p>
         <img src={planetImages.find(img => img.planet === planet.name).image} alt={planet.name} />
         <div className="planet-name">
           <p className="planet-title">{ planet.name }</p>
