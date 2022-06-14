@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { PlanetContext } from '../contexts/PlanetContext';
-import { planetImages } from '../assets/planetImages.js'
+import { planetImages } from '../assets/planetImages'
 
 function Table() {
   const { planets, nameFilter, numericFilter, order } = useContext(PlanetContext);
@@ -63,20 +63,30 @@ function Table() {
   function renderPlanets() {
     return combinedFilters().map((planet, index) => (
       <div key={ planet.name } className="planet">
-        <p>{index + 1 }</p>
+        <p>{`#${index + 1 }`}</p>
         <img src={planetImages.find(img => img.planet === planet.name).image} alt={planet.name} />
-        <p>{ planet.name }</p>
-        <p>{ planet.rotation_period }</p>
-        <p>{ planet.orbital_period }</p>
-        <p>{ planet.diameter }</p>
-        <p>{ planet.terrain }</p>
+        <div className="planet-name">
+          <p className="planet-title">{ planet.name }</p>
+          <p className="planet-info">{ planet.terrain }</p>
+        </div>
+        <div>
+          <p className="title">Rotation</p>  
+          <p className="info">{ `${planet.rotation_period} days` }</p>
+        </div>
+        <div>
+          <p className="title">Orbital</p>  
+          <p className="info">{ `${planet.orbital_period} days` }</p>
+        </div>
+        <div>
+          <p className="title">Diameter</p>  
+          <p className="info">{ planet.diameter }</p>
+        </div>
       </div>
     ));
   }
 
   return (
     <div>
-      { loading && <p>loading</p> }
       { !loading && (
         renderPlanets()
      )}

@@ -94,7 +94,7 @@ function NumericFilter() {
           type="button"
           onClick={ deleteAllFilters }
         >
-          Remove Filter
+          Remove
         </button>
       </form>
       { renderActiveFilters() }
