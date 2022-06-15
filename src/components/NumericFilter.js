@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { PlanetContext } from '../contexts/PlanetContext';
+import '../styles/numericFilter.scss';
+
 
 function NumericFilter() {
   const { numericFilter, setNumericFilter } = useContext(PlanetContext);
@@ -17,11 +19,12 @@ function NumericFilter() {
     const newOptions = options.filter((option) => option !== column);
     setOptions(newOptions);
     setColumn(newOptions[0]);
-    setComparison('greather than');
+    setComparison('greater than');
     setValue(0);
   }
 
   function handleFilter() {
+    if (!column) return;
     addFilter();
     resetForm();
   }
@@ -35,6 +38,7 @@ function NumericFilter() {
   function deleteFilter(columnName) {
     const newFilters = numericFilter.filter(({ column }) => column !== columnName);
     setNumericFilter([...newFilters]);
+    setColumn(columnName);
     setOptions((prevState) => [...prevState, columnName]);
   }
 
@@ -46,13 +50,13 @@ function NumericFilter() {
   function renderActiveFilters() {
     return numericFilter
       .map(({ column, comparison, value }) => (
-        <div key={ column }>
-          <span>{`${column} ${comparison} ${value}`}</span>
+        <div className="active-filters" key={ column }>
+          <span>{`${column} ${comparison}: ${value}`}</span>
           <button
             type="button"
             onClick={ () => deleteFilter(column) }
           >
-            Excluir
+            x
           </button>
         </div>
       ));
@@ -60,7 +64,7 @@ function NumericFilter() {
 
   return (
     <div>
-      <form>
+      <form id="numeric-filter">
         <select
           onChange={ (e) => setColumn(e.target.value) }
           name="column"

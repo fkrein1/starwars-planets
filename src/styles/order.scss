@@ -1,0 +1,33 @@
+#sort-filter {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0px;
+
+
+  select {
+    padding: 3px 5px;
+    font-size: 14px;
+    width: 200px;
+    background: rgba(37, 39, 40, 0.7);
+    border: 0.5px white solid;
+    border-radius: 4px;
+    color: white;
+  }
+
+    @media only screen and (max-width: 550px) {
+    margin-top: 20px;
+    flex-direction: column;
+    
+    select {
+      width: 150px;
+      text-align: center;
+
+    }
+
+    #sort-labels{ 
+      display: flex;
+      gap: 5px;  
+    }
+  }
+}

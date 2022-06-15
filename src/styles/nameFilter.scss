@@ -1,0 +1,17 @@
+#search-filter {
+  margin: 10px 0px;
+
+  input {
+    padding: 7px 5px;
+    font-size: 14px;
+    width: 330px;
+    background: rgba(37, 39, 40, 0.7);
+    border: 0.5px white solid;
+    border-radius: 4px;
+    color: white;
+
+    @media only screen and (max-width: 550px) {
+      width: 250px;
+    }
+  }
+}

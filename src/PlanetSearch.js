@@ -3,8 +3,9 @@ import NameFilter from './components/NameFilter';
 import NumericFilter from './components/NumericFilter';
 import Order from './components/Order';
 import Table from './components/Table';
-import background from './assets/background.jpg'
-import logo from './assets/logo.png'
+import background from './assets/background.jpg';
+import logo from './assets/logo.png';
+import './styles/planetSearch.scss';
 
 function PlanetSearch() {
   return (

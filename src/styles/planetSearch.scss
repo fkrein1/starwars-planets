@@ -1,0 +1,23 @@
+* {
+  font-family: 'Barlow', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.wrapper {
+  flex: auto;
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  #logo {
+    width: 220px;
+    margin-top: 10px;
+  }
+  
+}

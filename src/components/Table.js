@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { PlanetContext } from '../contexts/PlanetContext';
 import { planetImages } from '../assets/planetImages'
+import '../styles/loading.scss'
+import '../styles/table.scss'
 
 function Table() {
   const { planets, nameFilter, numericFilter, order } = useContext(PlanetContext);
@@ -57,40 +59,44 @@ function Table() {
     const filteredByName = filterByName(planetsData);
     const filteredByNumeric = filterByNumeric(filteredByName);
     const filteredAndSorted = sortPlanets(filteredByNumeric);
-    return filteredAndSorted.filter((planet) => !planetsToExclude.includes(planet.name));
+    return filteredAndSorted
+      .filter((planet) => !planetsToExclude.includes(planet.name));
   }
 
   function renderPlanets() {
-    return combinedFilters().map((planet, index) => (
+    return combinedFilters().map((planet) => (
       <div key={ planet.name } className="planet">
         <img src={planetImages.find(img => img.planet === planet.name).image} alt={planet.name} />
         <div className="planet-name">
-          <p className="planet-title">{ planet.name }</p>
+          <p className="planet-title">{ planet.name.toUpperCase() }</p>
           <p className="planet-info">{ planet.terrain }</p>
         </div>
         <div className="planet-data">
-          <p className="title">Rotation</p>  
-          <p className="info">{ `${planet.rotation_period} days` }</p>
+          <p>Rotation</p>  
+          <p>{ `${planet.rotation_period} days` }</p>
         </div>
         <div className="planet-data">
-          <p className="title">Orbital</p>  
-          <p className="info">{ `${planet.orbital_period} days` }</p>
+          <p>Orbital</p>  
+          <p>{ `${planet.orbital_period} days` }</p>
         </div>
         <div className="planet-data">
-          <p className="title">Diameter</p>  
-          <p className="info">{ planet.diameter }</p>
+          <p>Diameter</p>  
+          <p>{ planet.diameter }</p>
         </div>
       </div>
     ));
   }
 
   return (
-    <div>
+    <div className="planets">
+      { loading && (
+        <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      )}
       { !loading && (
         renderPlanets()
      )}
     </div>
-  );
+  )
 }
 
 export default Table;

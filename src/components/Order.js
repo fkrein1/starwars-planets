@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { PlanetContext } from '../contexts/PlanetContext';
+import '../styles/order.scss';
+
 
 function Order() {
   const { order, setOrder } = useContext(PlanetContext);
@@ -9,7 +11,7 @@ function Order() {
   }
 
   return (
-    <form>
+    <form id="sort-filter">
       <select
         onChange={ handleChange }
         name="column"
@@ -20,26 +22,28 @@ function Order() {
         <option value="orbital_period">orbital_period</option>
         <option value="diameter">diameter</option>
       </select>
-      <label htmlFor="ASC">
-        ASC
-        <input
-          type="radio"
-          name="type"
-          value="ASC"
-          checked={ order.type === 'ASC' }
-          onChange={ handleChange }
-        />
-      </label>
-      <label htmlFor="DESC">
-        DESC
-        <input
-          type="radio"
-          name="type"
-          value="DESC"
-          checked={ order.type === 'DESC' }
-          onChange={ handleChange }
-        />
-      </label>
+      <div id="sort-labels">
+        <label htmlFor="ASC">
+          ASC
+          <input
+            type="radio"
+            name="type"
+            value="ASC"
+            checked={ order.type === 'ASC' }
+            onChange={ handleChange }
+          />
+        </label>
+        <label htmlFor="DESC">
+          DESC
+          <input
+            type="radio"
+            name="type"
+            value="DESC"
+            checked={ order.type === 'DESC' }
+            onChange={ handleChange }
+          />
+        </label>
+      </div>
     </form>
   );
 }
