@@ -13,15 +13,11 @@ function PlanetSearch() {
       backgroundRepeat: 'repeat',
       backgroundSize: '100% auto',
      }}>
-      <header>
-        <img src={logo} alt="starwars logo" id="logo" />
-      </header>
-      <section className="content">
-        <NameFilter />
-        <NumericFilter />
-        <Order />
-        <Table />
-      </section>
+      <img src={logo} alt="starwars logo" id="logo" />
+      <NameFilter />
+      <NumericFilter />
+      <Order />
+      <Table />
     </div> 
   );
 }

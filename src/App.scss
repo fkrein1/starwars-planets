@@ -18,15 +18,6 @@ body {
     width: 220px;
     margin-top: 10px;
   }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px 0px;
-    padding: 20px 50px;
-    background: rgba(22, 24, 25, 0.8);
-  }
   
 }
 
@@ -35,14 +26,14 @@ body {
   gap: 20px;
   align-items: center;
   margin-top: 10px;
-  background: rgba(31, 33, 35, 0.5);
+  background: rgba(31, 33, 35, 0.3);
   text-align: center;
   padding: 10px 20px;
   border-radius: 10px;
   margin: 20px 0;
 
   img {
-    width: 50px;
+    width: 80px;
   }
 
   .planet-name {
@@ -75,10 +66,22 @@ body {
   .planet {
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 0.1px;
+    gap: 1px;
+    flex: auto;
+    padding: 10px 5px;
+
+    img { 
+      width: 120px;
+    }
 
     .planet-name {
       text-align: center;
+    }
+
+    .planet-data {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
   }
 }

@@ -68,15 +68,15 @@ function Table() {
           <p className="planet-title">{ planet.name }</p>
           <p className="planet-info">{ planet.terrain }</p>
         </div>
-        <div>
+        <div className="planet-data">
           <p className="title">Rotation</p>  
           <p className="info">{ `${planet.rotation_period} days` }</p>
         </div>
-        <div>
+        <div className="planet-data">
           <p className="title">Orbital</p>  
           <p className="info">{ `${planet.orbital_period} days` }</p>
         </div>
-        <div>
+        <div className="planet-data">
           <p className="title">Diameter</p>  
           <p className="info">{ planet.diameter }</p>
         </div>
