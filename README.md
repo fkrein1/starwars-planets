@@ -1,6 +1,12 @@
 # Star Wars Planets
 <br>
-An React application that renders planets from an Star Wars API.
+Search and filter planets from Star Wars in this React Application.
 <br>
 <br>
-Built with functional components, the useEffect, useContext and useState APIs. The filtering, sorting and searching functionalities are divided into individual components and the state is shared through context.
+Built with functional components and hooks. The filtering, sorting and searching functionalities are divided into individual components and the state is shared through context.
+<br>
+<br>
+<a href="https://fkrein1.github.io/starwars-planets">Website</a>
+</br>
+</br>
+<img src="./starwars.png" alt="image of star wars app" />
