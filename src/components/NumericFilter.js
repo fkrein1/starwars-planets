@@ -42,11 +42,6 @@ function NumericFilter() {
     setOptions((prevState) => [...prevState, columnName]);
   }
 
-  function deleteAllFilters() {
-    setNumericFilter([]);
-    setOptions(['rotation_period', 'orbital_period', 'diameter']);
-  }
-
   function renderActiveFilters() {
     return numericFilter
       .map(({ column, comparison, value }) => (
@@ -93,12 +88,6 @@ function NumericFilter() {
           onClick={ handleFilter }
         >
           Filter
-        </button>
-        <button
-          type="button"
-          onClick={ deleteAllFilters }
-        >
-          Remove
         </button>
       </form>
       { renderActiveFilters() }
