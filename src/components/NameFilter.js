@@ -3,14 +3,14 @@ import { PlanetContext } from '../contexts/PlanetContext';
 import '../styles/nameFilter.scss';
 
 function NameFilter() {
-  const { nameFilter, setNameFilter } = useContext(PlanetContext);
+  const { namesFilter, setNamesFilter } = useContext(PlanetContext);
 
   return (
     <div id="search-filter">
       <input
         placeholder="Search planet"
-        value={ nameFilter }
-        onChange={ (e) => setNameFilter(e.target.value) }
+        value={ namesFilter }
+        onChange={ (e) => setNamesFilter(e.target.value) }
       />
     </div>
   );
