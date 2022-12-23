@@ -13,11 +13,11 @@ export function Planets({ children }) {
   useEffect(() => {
     const getPlanets = async () => {
       const [api01, api02, api03, api04, api05] = await Promise.all([
-        fetch("https://swapi-trybe.herokuapp.com/api/planets/"),
-        fetch("https://swapi-trybe.herokuapp.com/api/planets/?page=2"),
-        fetch("https://swapi-trybe.herokuapp.com/api/planets/?page=3"),
-        fetch("https://swapi-trybe.herokuapp.com/api/planets/?page=4"),
-        fetch("https://swapi-trybe.herokuapp.com/api/planets/?page=5"),
+        fetch("https://swapi.dev/api/planets/"),
+        fetch("https://swapi.dev/api/planets/?page=2"),
+        fetch("https://swapi.dev/api/planets/?page=3"),
+        fetch("https://swapi.dev/api/planets/?page=4"),
+        fetch("https://swapi.dev/api/planets/?page=5"),
       ]);
 
       const [planet01, planet02, planet03, planet04, planet05] = await Promise
